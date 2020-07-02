@@ -24,16 +24,18 @@ public class SimpleProducer {
         KafkaProducer<String, JsonNode> producer = new KafkaProducer(properties);
         ObjectMapper mapper = new ObjectMapper();
 
-        Product product = new Product("1", "product-1");
-        ProducerRecord<String, JsonNode> record = new ProducerRecord("first_topic", mapper.valueToTree(product));
-        producer.send(record);
-        producer.flush();
+        for (int p = 1; p <= 20; p++) {
+            Product product = new Product(Integer.toString(p), "product-" + p);
+            ProducerRecord<String, JsonNode> productRecord = new ProducerRecord("products", mapper.valueToTree(product));
+            producer.send(productRecord);
+            for (int o = 1; o <= 100; o++) {
+                Order order = new Order( Integer.toString(o), product.getId(), p * o + o);
+                ProducerRecord<String, JsonNode>  orderRecord = new ProducerRecord("orders", mapper.valueToTree(order));
+                producer.send(orderRecord);
+            }
+        }
 
-        Order order = new Order("1", "1", 10);
-        record = new ProducerRecord("second_topic", mapper.valueToTree(order));
-        producer.send(record);
         producer.flush();
-
         producer.close();
         System.out.println("end");
     }

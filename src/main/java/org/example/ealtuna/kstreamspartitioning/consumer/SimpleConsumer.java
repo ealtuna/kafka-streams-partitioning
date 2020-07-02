@@ -28,7 +28,7 @@ public class SimpleConsumer {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        consumer.subscribe(Arrays.asList("second_topic"));
+        consumer.subscribe(Arrays.asList("orders"));
         ConsumerRecords<String, JsonNode> records = consumer.poll(10000);
         System.out.println(records.count());
         try {
