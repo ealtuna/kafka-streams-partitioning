@@ -24,11 +24,11 @@ public class AvroProducer {
         try (KafkaProducer<String, SpecificRecord> producer = new KafkaProducer(props)) {
             for (int p = 1; p <= 20; p++) {
                 Product product = new Product(Integer.toString(p), "product-" + p);
-                ProducerRecord<String, SpecificRecord> productRecord = new ProducerRecord("products", product);
+                ProducerRecord<String, SpecificRecord> productRecord = new ProducerRecord("products", product.getId(),product);
                 producer.send(productRecord);
                 for (int o = 1; o <= 100; o++) {
                     Order order = new Order( Integer.toString(o), product.getId(), p * o + o);
-                    ProducerRecord<String, SpecificRecord>  orderRecord = new ProducerRecord("orders", order);
+                    ProducerRecord<String, SpecificRecord>  orderRecord = new ProducerRecord("orders", order.getId(), order);
                     producer.send(orderRecord);
                 }
                 producer.flush();
