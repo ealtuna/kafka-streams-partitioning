@@ -9,14 +9,12 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.connect.json.JsonDeserializer;
-import org.example.ealtuna.kstreamspartitioning.model.Order;
-import org.example.ealtuna.kstreamspartitioning.model.Product;
+import org.example.ealtuna.kstreamspartitioning.model.json.Order;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
 
-public class SimpleConsumer {
+public class JsonConsumer {
     public static void main(String[] args) {
         Properties properties= new Properties();
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");

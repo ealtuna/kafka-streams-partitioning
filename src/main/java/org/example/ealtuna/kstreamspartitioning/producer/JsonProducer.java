@@ -7,13 +7,11 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.kafka.connect.json.JsonSerializer;
-import org.apache.kafka.connect.json.JsonDeserializer;
-import org.example.ealtuna.kstreamspartitioning.model.Order;
-import org.example.ealtuna.kstreamspartitioning.model.Product;
+import org.example.ealtuna.kstreamspartitioning.model.json.*;
 
 import java.util.Properties;
 
-public class SimpleProducer {
+public class JsonProducer {
     public static void main(String[] args) {
         System.out.println("start");
 

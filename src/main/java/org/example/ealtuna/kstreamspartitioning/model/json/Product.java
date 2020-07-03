@@ -1,4 +1,4 @@
-package org.example.ealtuna.kstreamspartitioning.model;
+package org.example.ealtuna.kstreamspartitioning.model.json;
 
 public class Product {
     private String id;
