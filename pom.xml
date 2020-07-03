@@ -111,7 +111,8 @@
                         <param>http://localhost:8081</param>
                     </schemaRegistryUrls>
                     <subjects>
-                        <transactions-value>src/main/resources/avro/io/confluent/examples/clients/basicavro/Payment2a.avsc</transactions-value>
+                        <transactions-value>src/main/resources/avro/org/example/ealtuna/kstreamspartitioning/Product.avsc</transactions-value>
+                        <transactions-value>src/main/resources/avro/org/example/ealtuna/kstreamspartitioning/Order.avsc</transactions-value>
                     </subjects>
                 </configuration>
                 <goals>
