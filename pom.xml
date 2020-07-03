@@ -97,7 +97,7 @@
                                 <include>Product.avsc</include>
                                 <include>Order.avsc</include>
                             </includes>
-                            <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
+                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

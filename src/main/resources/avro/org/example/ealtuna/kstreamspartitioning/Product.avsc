@@ -1,0 +1,9 @@
+{
+ "namespace": "org.example.ealtuna.kstreamspartitioning.model",
+ "type": "record",
+ "name": "Product",
+ "fields": [
+     {"name": "id", "type": "string"},
+     {"name": "name", "type": "string"}
+ ]
+}
