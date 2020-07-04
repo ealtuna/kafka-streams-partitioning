@@ -35,24 +35,32 @@ public class OrderProductJoin {
         final SpecificAvroSerde<Order> orderValueSerde = new SpecificAvroSerde();
         orderValueSerde.configure(serdeConfig, false);
 
+        final SpecificAvroSerde<ProductOrder> productOrderValueSerde = new SpecificAvroSerde();
+        productOrderValueSerde.configure(serdeConfig, false);
+
+        final SpecificAvroSerde<ProductOrder> productOrderKeySerde = new SpecificAvroSerde();
+        productOrderKeySerde.configure(serdeConfig, false);
+
         final StreamsBuilder builder = new StreamsBuilder();
         KTable<String, Product> products = builder.table(PRODUCTS_TOPIC, Consumed.with(Serdes.String(), productValueSerde));
         KStream<String, Order> orders = builder.stream(ORDERS_TOPIC, Consumed.with(Serdes.String(), orderValueSerde));
-        KStream<String, Order> ordersByProductId = orders.map((k, v) -> KeyValue.pair(v.getProductId().toString(), v));
-        KStream<String, Product> productsOrders = ordersByProductId.leftJoin(
+        KStream<String, Order> ordersByProductId = orders.selectKey((k, v) -> v.getProductId().toString());
+        KStream<String, ProductOrder> productsOrders = ordersByProductId.leftJoin(
                 products,
-                (order, product) -> product,
+                (order, product) -> new ProductOrder(order.getId(), product.getId(), order.getAmount(), product.getName()),
                 Joined.with(Serdes.String(), orderValueSerde, productValueSerde)
         );
-        KTable<Product, Long> productOrdersCount = productsOrders.groupBy(
-                (productId, product) -> product,
-                Grouped.with(productKeySerde, productValueSerde)
+        KTable<String, Long> productOrdersCount = productsOrders.groupBy(
+                (productId, productOrder) -> productOrder.getProductId().toString(),
+                Grouped.with(Serdes.String(), productOrderValueSerde)
         ).count();
 
+        productOrdersCount.toStream().peek((k,v) -> System.out.println("Key: " + k + " - " + v));
         Topology streamTopology = builder.build();
 
         final KafkaStreams streams = new KafkaStreams(streamTopology, properties);
 
+        streams.cleanUp();
         streams.start();
     }
 }
