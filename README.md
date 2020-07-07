@@ -27,3 +27,7 @@ docker-compose exec kafka kafka-topics --describe --topic orders --zookeeper zoo
 ## Produce example messages
 
 Use the Avro Producer to generate messages for Products and Orders.
+
+## Partitioning requirements
+
+In streaming applications its a common requirement to take as input an stream (for example comming for CDC producer) and enrich the data with additional information. For example, orders generated in a relational database engine can be enriched with information of the order's product.
