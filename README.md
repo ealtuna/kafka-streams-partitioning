@@ -1,5 +1,7 @@
 # kafka-streams-partitioning
 
+Basic example showing how partitioning affects join operations in Kafka Streams.
+
 ## Prerequisites
 
     docker-compose up -d
