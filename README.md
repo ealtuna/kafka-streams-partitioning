@@ -4,6 +4,8 @@ Basic example showing how partitioning affects join operations in Kafka Streams.
 
 ## Prerequisites
 
+Install Docker(>1.11) and Docker Compose.
+
     docker-compose up -d
 
 ```
