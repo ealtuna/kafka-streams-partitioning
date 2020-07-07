@@ -45,3 +45,9 @@ Link: https://kafka.apache.org/23/documentation/streams/developer-guide/dsl-api.
 ## References
 
 https://assets.confluent.io/m/7a91acf41502a75e/original/20180328-EB-Confluent_Designing_Event_Driven_Systems.pdf
+
+## Cleanup
+
+Stop the Schema Registry, the Kafka broker, and ZooKeeper instance:
+
+    docker-compose down
