@@ -30,7 +30,9 @@ Use the Avro Producer to generate messages for Products and Orders.
 
 ## Partitioning requirements
 
-In streaming applications its a common requirement to take as input an stream (for example comming for Change Data Capture producer) and enrich the data with additional information. For example, orders generated in a relational database engine can be enriched with information of the order's product.
+In streaming applications its a common requirement to take as input an stream (for example comming for Change Data Capture producer) and enrich the data with additional information. For example, orders generated in a relational database engine can be enriched with information of the order's product. The advantage of using the stream driven approach in the enrichment is the possibility to perform lookups at very large scale and with a low processing latency.
+
+
 
 Link: https://kafka.apache.org/23/documentation/streams/developer-guide/dsl-api.html#join-co-partitioning-requirements
 
