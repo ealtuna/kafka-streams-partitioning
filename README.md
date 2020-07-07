@@ -6,7 +6,11 @@ Basic example showing how partitioning affects join operations in Kafka Streams.
 
 Install Docker(>1.11) and Docker Compose.
 
+Start Zookeeper, Kafka, and Confluent Schema Registry:
+
     docker-compose up -d
+
+Create the topics used by this demo:
 
 ```
 docker-compose exec kafka  \
