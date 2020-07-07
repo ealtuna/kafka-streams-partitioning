@@ -62,5 +62,14 @@ public class OrderProductJoin {
 
         streams.cleanUp();
         streams.start();
+
+        // Add shutdown hook to respond to SIGTERM and gracefully close Kafka Streams
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                streams.close();
+            } catch (final Exception e) {
+                // ignored
+            }
+        }));
     }
 }
