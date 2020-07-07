@@ -22,3 +22,6 @@ docker-compose exec kafka kafka-topics --describe --topic products --zookeeper z
 docker-compose exec kafka kafka-topics --describe --topic orders --zookeeper zookeeper:2181
 ```
 
+## Produce example messages
+
+Use the Avro Producer to generate messages for Products and Orders.
